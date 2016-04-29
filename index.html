@@ -2,6 +2,21 @@
 <html>
 <head>
 	<title>scottocorrect</title>
+	<style type="text/css">
+	html {
+		font-family: Courier;
+	}
+
+	h1 {
+		margin-left: 0.5cm;
+		font-size: 3em;
+		transform: rotate(-10deg);
+		position: fixed;
+		top: 2cm;
+		left: 2cm;
+		transition: transform 0.2s linear;
+	}
+	</style>
 </head>
 <body>
 
@@ -75,8 +90,15 @@
 
 
 	function main() {
-		document.title = mess_with_vowels("scottocorrect");
 		var title = document.querySelector("#main_title");
+		r = Math.random();
+		if (r < 0.15) {
+			document.title = "scottocorrect";
+			title.innerText = "scottocorrect";
+			// title.style.transform = "rotate("+Math.ceil(Math.random()*-15)+"deg)";
+			return;
+		}
+		document.title = mess_with_vowels("scottocorrect");
 		title.innerText = mess_with_vowels(mess_with_vowels("scottocorrect"));
 
 	}

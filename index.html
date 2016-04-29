@@ -4,6 +4,9 @@
 	<title>scottocorrect</title>
 </head>
 <body>
+
+<h1 id="main_title">scottocorrect</h1>
+
 <script type="text/javascript">
 	// Apply one or more scott rules to input text
 	function scottify(text) {
@@ -24,24 +27,24 @@
 
 		var change = function() {
 			var v = pick(locs);
-			return word.slice(0, v) + pick(vowels) + word.slice(v+1, word.length);
+			word = word.slice(0, v) + pick(vowels) + word.slice(v+1, word.length);
 		};
 
 		var sw = function() {
 			var i = pick(locs);
 			var j = pick(locs);
-			return swap(word, i, j);
+			word = swap(word, i, j);
 		};
 
 		var ins = function() {
 			var i = pick(locs);
 			var j = pick(locs);
-			return insert(word, i, j);
+			word = insert(word, i, j);
 		};
 
 		var mutations = [change, sw, ins];
-
-		return pick(mutations)();		
+		pick(mutations)();
+		return word;		
 	}
 
 	// pick one element from an array
@@ -72,9 +75,13 @@
 
 
 	function main() {
-		document.title = mess_with_vowels(document.title);
+		document.title = mess_with_vowels("scottocorrect");
+		var title = document.querySelector("#main_title");
+		title.innerText = mess_with_vowels(mess_with_vowels("scottocorrect"));
+
 	}
 
+	window.setInterval(main, 1250);
 	main();
 </script>
 </body>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>scottocorrect</title>
+</head>
+<body>
+<script type="text/javascript">
+	// Apply one or more scott rules to input text
+	function scottify(text) {
+		// TODO
+	}
+
+
+	var vowels = "aeiou";
+	function mess_with_vowels(word) {
+		word = word.toLowerCase();
+		var locs = [];
+		for (var i = 0; i < word.length; i++) {
+			var char = word[i];
+			if (vowels.includes(char)) {
+				locs.push(i);
+			}
+		}
+
+		var change = function() {
+			var v = pick(locs);
+			return word.slice(0, v) + pick(vowels) + word.slice(v+1, word.length);
+		};
+
+		var sw = function() {
+			var i = pick(locs);
+			var j = pick(locs);
+			return swap(word, i, j);
+		};
+
+		var ins = function() {
+			var i = pick(locs);
+			var j = pick(locs);
+			return insert(word, i, j);
+		};
+
+		var mutations = [change, sw, ins];
+
+		return pick(mutations)();		
+	}
+
+	// pick one element from an array
+	function pick(arr) {
+		var choice = Math.floor(Math.random() * arr.length);
+		return arr[choice];
+	}
+
+	// swap letters at i and j
+	function swap(word, i, j) {
+		if (i > j) {
+			var tmp = j;
+			j = i;
+			i = tmp;
+		}
+		return word.slice(0, i) + word.charAt(j) + word.slice(i+1, j) + word.charAt(i) + word.slice(j+1, word.length);
+	}
+
+	// insert j before position i
+	function insert(word, i, j) {
+		if (i > j) {
+			var tmp = j;
+			j = i;
+			i = tmp;
+		}
+		return word.slice(0, i) + word.charAt(j) + word.slice(i, j) + word.slice(j+1, word.length);
+	}
+
+
+	function main() {
+		document.title = mess_with_vowels(document.title);
+	}
+
+	main();
+</script>
+</body>
+</html>
